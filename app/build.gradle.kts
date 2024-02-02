@@ -70,7 +70,7 @@ publishing {
 dependencies {
     implementation("nl.dionsegijn:konfetti-xml:2.0.4")
     val appcompat_version = "1.6.1"
-    implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha13")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     implementation("androidx.appcompat:appcompat:$appcompat_version")
     implementation("com.google.android.material:material:1.11.0")
