@@ -54,10 +54,23 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.contextu.al"
+            artifactId = "guideblocks"
+            version = "1.0"
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+}
 
 dependencies {
     implementation("nl.dionsegijn:konfetti-xml:2.0.4")
     val appcompat_version = "1.6.1"
+    implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha13")
 
     implementation("androidx.appcompat:appcompat:$appcompat_version")
     implementation("com.google.android.material:material:1.11.0")
