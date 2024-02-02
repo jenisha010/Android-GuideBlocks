@@ -43,6 +43,18 @@ android {
     }
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17    
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+
 dependencies {
     implementation("nl.dionsegijn:konfetti-xml:2.0.4")
     val appcompat_version = "1.6.1"
