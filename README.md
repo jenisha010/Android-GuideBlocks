@@ -18,6 +18,39 @@ There are two ways to use GuideBlocks:
 
 0. you have an account on the Contextual Dashboard and you've added the Android SDK, you've added the **app_key** into your App and tested a simple Guide in your App.
 
+1. In your build.gradle add:
+
+```
+implementation 'com.github.GuideBlocks-org:Android-GuideBlocks:0.0.4', {
+        exclude group: 'com.google.android.material'
+        exclude group: 'com.github.bumptech.glide'
+    }
+```
+
+2. In your activities where you want to use GuideBlocks add (for example):
+
+```
+import com.contextu.al.confetti.ConfettiGuideBlocks
+import com.contextu.al.core.CtxEventObserver
+```
+
+for the GuideBlock you wish to use, then add 
+
+```
+        val confettiGuideBlocks = "confetti"
+
+        Contextual.registerGuideBlock(confettiGuideBlocks).observe(this){ contextualContainer ->
+            if(contextualContainer.guidePayload.guide.guideBlock.contentEquals(confettiGuideBlocks)){
+                ConfettiGuideBlocks(this@MainActivity).show()
+            }
+        }
+```
+
+
+4. build and run!
+
+
+
 
 ### 2. Make your own App elements into private GuideBlocks
 
@@ -51,9 +84,9 @@ Email: support@contextu.al
 TestApp: https://github.com/contextu-al/FavDish
 TestAppBranch: confetti
 Description: Launch confetti to targeted users at any time with this low-code GuideBlock
-Acknowledgements: https://github.com/simibac/ConfettiSwiftUI
-Screenshot: https://github.com/GuideBlocks-org/iOS-GuideBlocks/blob/main/Sources/iOS-GuideBlocks/Confetti/confetti-guideblock.png 
-Video: https://vimeo.com/907653617/7384df8a67
+Acknowledgements: https://github.com/DanielMartinus/Konfetti
+Screenshot: 
+Video: https://vimeo.com/manage/videos/909526616/8efaae6607
 Extensibility: {
   "guideBlockKey": "Confetti"
 }
