@@ -19,8 +19,12 @@ In this example, we show how to make a Fancy Announcement, just like the crazy o
    }
    `
 * Match the name in the JSON to the name of your wrapper in the code
+
+JSON editing
  
 <img src="<img src="https://raw.githubusercontent.com/contextu-al/FavDish/main/screenshots/FancyAnnouncementJSON.png" alt="Adding your Extra JSON" width="200"/>
+
+or use the Tree method of editing
 
 <img src="<img src="https://raw.githubusercontent.com/contextu-al/FavDish/main/screenshots/FancyAnnouncementTree.png" alt="Adding your Extra JSON" width="200"/>
 

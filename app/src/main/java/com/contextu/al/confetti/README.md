@@ -48,10 +48,14 @@ for the GuideBlock you wish to use, then add
    }
    `
 * Match the name in the JSON to the name of your wrapper in the code
- 
-<img src="<img src="https://raw.githubusercontent.com/contextu-al/FavDish/main/screenshots/confettiJSON.png" alt="Adding your Extra JSON" width="200"/>
 
-<img src="<img src="https://raw.githubusercontent.com/contextu-al/FavDish/main/screenshots/confettiTree.png" alt="Adding your Extra JSON" width="200"/>
+JSON editing
+ 
+<img src="https://raw.githubusercontent.com/contextu-al/FavDish/main/screenshots/confettiJSON.png" alt="Adding your Extra JSON" width="200"/>
+
+or use the Tree method of editing
+
+<img src="https://raw.githubusercontent.com/contextu-al/FavDish/main/screenshots/confettiTree.png" alt="Adding your Extra JSON" width="200"/>
 
 7. If you are still in Preview Mode, then you should see the Announcement will magically change to confetti
 8. Change the Title and Content and buttons. Play around with it and see the results.
