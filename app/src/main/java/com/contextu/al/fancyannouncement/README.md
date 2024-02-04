@@ -4,8 +4,36 @@ In this example, we show how to make a Fancy Announcement, just like the crazy o
 
 1. Create an account at [Contextual Dashboard](https://dashboard.contextu.al/ "Contextual Dashboard").
 2. Install the Contextual SDK following the instructions for IOS or Android.
-3. Add the sample wrapper code  *FancyAnnouncement* to your App.
-4. Copy-Paste the instantiation of the Guide Component AFTER the Contextual SDK registration.
+3. Copy-Paste the instantiation of the Guide Component AFTER the Contextual SDK registration.
+
+**In your build.gradle add:**
+
+```
+implementation 'com.github.GuideBlocks-org:Android-GuideBlocks:0.0.4', {
+        exclude group: 'com.google.android.material'
+        exclude group: 'com.github.bumptech.glide'
+    }
+```
+
+**In your activities where you want to use GuideBlocks add (for example):**
+
+```
+import com.contextu.al.fancyannouncement.FancyAnnouncementGuideBlocks
+import com.contextu.al.core.CtxEventObserver
+```
+
+4. for the GuideBlock you wish to use, then Copy-Paste the instantiation of the Guide Component AFTER the Contextual SDK registration.
+
+```
+        val faGuideBlocks = "FancyAnnouncement"
+
+        Contextual.registerGuideBlock(faGuideBlocks).observe(this){ contextualContainer ->
+            if(contextualContainer.guidePayload.guide.guideBlock.contentEquals(faGuideBlocks)){
+                FancyAnnouncementGuideBlocks(this@MainActivity).show()
+            }
+        }
+```
+ 
 5. Build your App and Run it on a phone or
 6. Go to the Dashboard and create a guide:
 * Use this [video]( https://vimeo.com/863886653#t=0m58s "Another Guide Creation How-to") to see the steps
