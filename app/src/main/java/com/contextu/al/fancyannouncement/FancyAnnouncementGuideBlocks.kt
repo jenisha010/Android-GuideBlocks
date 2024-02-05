@@ -14,12 +14,10 @@ class FancyAnnouncementGuideBlocks(private val activity: Activity) {
 
     fun show(title: String, content: String, negativeText: String, negativeButtonListener: View.OnClickListener,
              positiveText: String, positiveButtonListener: View.OnClickListener, imageUrl: String){
-        val inflater = activity.layoutInflater
-
         val dialog = Dialog(activity)
         dialog.setContentView(R.layout.fancy_announcement)
         dialog.window?.setLayout((activity.resources.displayMetrics.widthPixels * 0.90).toInt(),
-            (activity.resources.displayMetrics.heightPixels * 0.50).toInt())
+            (activity.resources.displayMetrics.heightPixels * 0.55).toInt())
         dialog.show()
         val fancyAnnouncementImage = dialog.findViewById<ImageView>(R.id.announcementImage)
         fancyAnnouncementImage?.let {
