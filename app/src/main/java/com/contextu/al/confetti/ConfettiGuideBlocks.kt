@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 
 class ConfettiGuideBlocks(private val activity: Activity) {
 
-    fun show(){
+    fun show(): KonfettiView{
         val view = activity.layoutInflater.inflate(R.layout.konfetti, null, true)
         val viewGroup = (activity.findViewById(android.R.id.content) as ViewGroup).getChildAt(0) as ViewGroup
         val party = Party(
@@ -27,6 +27,7 @@ class ConfettiGuideBlocks(private val activity: Activity) {
         val viewKonfetti = view.findViewById<KonfettiView>(R.id.konfettiView)
         viewGroup.addView(viewKonfetti)
         viewKonfetti.start(party)
+        return viewKonfetti
     }
 
 
