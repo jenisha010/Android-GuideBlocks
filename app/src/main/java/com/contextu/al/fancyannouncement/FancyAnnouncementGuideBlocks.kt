@@ -1,37 +1,42 @@
 package com.contextu.al.fancyannouncement
 
 import android.app.Activity
-import android.content.DialogInterface
-import android.view.Window
-import androidx.appcompat.app.AlertDialog
+import android.app.Dialog
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.contextu.al.R
+
 
 class FancyAnnouncementGuideBlocks(private val activity: Activity) {
 
-    fun show(title: String, content: String, negativeText: String, negativeButtonListener: DialogInterface.OnClickListener,
-             positiveText: String, positiveButtonListener: DialogInterface.OnClickListener, imageUrl: String){
-       // val view = activity.layoutInflater.inflate(R.layout.fancy_annoucenment, null, true)
-        //val viewGroup = (activity.findViewById(android.R.id.content) as ViewGroup).getChildAt(0) as ViewGroup
-        val alertDialog = AlertDialog.Builder(activity)
-            .setTitle(title)
-            .setMessage(content)
-            .setNegativeButton(negativeText, negativeButtonListener)
-            .setPositiveButton(positiveText, positiveButtonListener)
-            .create()
-        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        alertDialog.setContentView(R.layout.fancy_announcement)
-        alertDialog.show()
-//        val fancyAnnouncementImage = alertDialog.findViewById<ImageView>(R.id.announcementImage)
-//        fancyAnnouncementImage?.let {
-//            Glide.with(activity.baseContext).load(imageUrl).into(fancyAnnouncementImage)
-//        }
-//        val fancyAnnouncementTitle = alertDialog.findViewById<TextView>(R.id.fancy_announcement_title)
-//        fancyAnnouncementTitle?.text = title
-//        val fancyAnnouncementContent = alertDialog.findViewById<TextView>(R.id.fancy_announcement_message)
-//        fancyAnnouncementContent?.text = content
-//        val imageView = view.findViewById<ImageView>(R.id.fancy_announcement_imageview)
-//        viewGroup.addView(imageView)
-//        Glide.with(activity.baseContext).load(imageUrl).into(imageView)
+    fun show(title: String, content: String, negativeText: String, negativeButtonListener: View.OnClickListener,
+             positiveText: String, positiveButtonListener: View.OnClickListener, imageUrl: String){
+        val inflater = activity.layoutInflater
+
+        val dialog = Dialog(activity)
+        dialog.setContentView(R.layout.fancy_announcement)
+        dialog.window?.setLayout((activity.resources.displayMetrics.widthPixels * 0.90).toInt(),
+            (activity.resources.displayMetrics.heightPixels * 0.50).toInt())
+        dialog.show()
+        val fancyAnnouncementImage = dialog.findViewById<ImageView>(R.id.announcementImage)
+        fancyAnnouncementImage?.let {
+            Glide.with(activity.baseContext).load(imageUrl).into(fancyAnnouncementImage)
+        }
+        val fancyAnnouncementTitle = dialog.findViewById<TextView>(R.id.title)
+        fancyAnnouncementTitle?.text = title
+        val fancyAnnouncementContent = dialog.findViewById<TextView>(R.id.content)
+        fancyAnnouncementContent?.text = content
+
+        val createAccountButton = dialog.findViewById<Button>(R.id.create_button)
+        createAccountButton?.text = positiveText
+        createAccountButton.setOnClickListener(positiveButtonListener)
+
+        val cancelButton = dialog.findViewById<Button>(R.id.cancel_button)
+        cancelButton?.text = negativeText
+        cancelButton.setOnClickListener(negativeButtonListener)
 
     }
 }
