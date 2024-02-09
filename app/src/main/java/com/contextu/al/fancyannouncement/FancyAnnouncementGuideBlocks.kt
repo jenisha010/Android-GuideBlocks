@@ -19,28 +19,28 @@ class FancyAnnouncementGuideBlocks(private val activity: Activity): Dialog(activ
              positiveText: String,
              positiveButtonListener: View.OnClickListener,
              imageUrl: String) {
-        val dialog = Dialog(activity)
-        dialog.setContentView(R.layout.fancy_announcement)
-        dialog.window?.setLayout((activity.resources.displayMetrics.widthPixels * 0.90).toInt(),
-            (activity.resources.displayMetrics.heightPixels * 0.55).toInt())
-        dialog.show()
 
-        val fancyAnnouncementImage = dialog.findViewById<ImageView>(R.id.announcementImage)
+        this.setContentView(R.layout.fancy_announcement)
+        this.window?.setLayout((activity.resources.displayMetrics.widthPixels * 0.90).toInt(),
+            (activity.resources.displayMetrics.heightPixels * 0.55).toInt())
+        this.show()
+
+        val fancyAnnouncementImage = this.findViewById<ImageView>(R.id.announcementImage)
         fancyAnnouncementImage?.let {
             Glide.with(activity.baseContext).load(imageUrl).into(fancyAnnouncementImage)
         }
 
-        val fancyAnnouncementTitle = dialog.findViewById<TextView>(R.id.title)
+        val fancyAnnouncementTitle = this.findViewById<TextView>(R.id.title)
         fancyAnnouncementTitle?.text = title
 
-        val fancyAnnouncementContent = dialog.findViewById<TextView>(R.id.content)
+        val fancyAnnouncementContent = this.findViewById<TextView>(R.id.content)
         fancyAnnouncementContent?.text = content
 
-        val createAccountButton = dialog.findViewById<Button>(R.id.create_button)
+        val createAccountButton = this.findViewById<Button>(R.id.create_button)
         createAccountButton?.text = positiveText
         createAccountButton.setOnClickListener(positiveButtonListener)
 
-        val cancelButton = dialog.findViewById<Button>(R.id.cancel_button)
+        val cancelButton = this.findViewById<Button>(R.id.cancel_button)
         cancelButton?.text = negativeText
         cancelButton.setOnClickListener(negativeButtonListener)
     }
