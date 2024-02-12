@@ -1,7 +1,7 @@
 # Android-GuideBlocks
 
 This is a shared open source repository for GuideBlocks that can be used in Android Apps.
-You can use any of these GuideBlocks here in your App in Conjunction with the Contextual Android SDK and an account at https://dashboard.contextu.al
+You can use any of these GuideBlocks here in your App in Conjunction with the Contextual Android SDK and an account at https://dashboard.contextu.al 
 
 ## Using GuideBlocks
 
