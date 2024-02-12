@@ -20,8 +20,11 @@ There are two ways to use GuideBlocks:
 
 1. In your build.gradle add:
 
+
+![JitPack](https://img.shields.io/jitpack/version/com.github.GuideBlocks-org/Android-GuideBlocks)
+
 ```
-implementation 'com.github.GuideBlocks-org:Android-GuideBlocks:0.0.4', {
+implementation 'com.github.GuideBlocks-org:Android-GuideBlocks:<LATEST_VERSION>', {
         exclude group: 'com.google.android.material'
         exclude group: 'com.github.bumptech.glide'
     }
