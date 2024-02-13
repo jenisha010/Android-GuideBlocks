@@ -27,7 +27,7 @@ class ConfettiGuideBlocks(private val activity: Activity){
         )
         val viewKonfetti = view.findViewById<KonfettiView>(R.id.konfettiView)
         viewGroup.addView(viewKonfetti)
-
+        
         viewKonfetti.start(party)
 
         viewKonfetti.onParticleSystemUpdateListener = object : OnParticleSystemUpdateListener{
