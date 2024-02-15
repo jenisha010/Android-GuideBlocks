@@ -17,17 +17,15 @@ import java.util.concurrent.TimeUnit
 
 class ConfettiGuideBlocks(private val activity: Activity): Dialog(activity) {
 
+    private lateinit var viewKonfetti: KonfettiView
     init {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window?.setDimAmount(0f)
     }
-    override fun onCreate(savedInstanceState: Bundle) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.konfetti)
-    }
-
-    fun show(onStart: (inputStart: Unit) -> Unit, onEnd: (inputEnd: Unit) -> Unit){
         val party = Party(
             speed = 0f,
             maxSpeed = 30f,
@@ -37,9 +35,11 @@ class ConfettiGuideBlocks(private val activity: Activity): Dialog(activity) {
             position = Position.Relative(0.5, 0.3),
             emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100)
         )
-        val viewKonfetti = findViewById<KonfettiView>(R.id.konfettiView)
+        viewKonfetti = findViewById<KonfettiView>(R.id.konfettiView)
         viewKonfetti.start(party)
+    }
 
+    fun show(onStart: (inputStart: Unit) -> Unit, onEnd: (inputEnd: Unit) -> Unit){
         viewKonfetti.onParticleSystemUpdateListener = object : OnParticleSystemUpdateListener{
             override fun onParticleSystemEnded(view: KonfettiView, party: Party, activeSystems: Int) {
                 onEnd
