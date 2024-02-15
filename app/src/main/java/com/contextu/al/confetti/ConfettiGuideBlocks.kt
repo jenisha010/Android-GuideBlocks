@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.view.ViewGroup
+import android.os.Bundle
 import android.view.Window
 import com.contextu.al.R
 import nl.dionsegijn.konfetti.core.Party
@@ -17,12 +17,17 @@ import java.util.concurrent.TimeUnit
 
 class ConfettiGuideBlocks(private val activity: Activity): Dialog(activity) {
 
-
-    fun show(onStart: (inputStart: Unit) -> Unit, onEnd: (inputEnd: Unit) -> Unit){
+    init {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window?.setDimAmount(0f)
+    }
+    override fun onCreate(savedInstanceState: Bundle) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.konfetti)
+    }
+
+    fun show(onStart: (inputStart: Unit) -> Unit, onEnd: (inputEnd: Unit) -> Unit){
         val party = Party(
             speed = 0f,
             maxSpeed = 30f,
@@ -38,6 +43,7 @@ class ConfettiGuideBlocks(private val activity: Activity): Dialog(activity) {
         viewKonfetti.onParticleSystemUpdateListener = object : OnParticleSystemUpdateListener{
             override fun onParticleSystemEnded(view: KonfettiView, party: Party, activeSystems: Int) {
                 onEnd
+                dismiss()
             }
 
             override fun onParticleSystemStarted(view: KonfettiView, party: Party, activeSystems: Int) {
