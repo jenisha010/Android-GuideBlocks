@@ -22,7 +22,7 @@ import com.contextu.al.circlevideo.CircleVideoGuideBlocks
 import com.contextu.al.core.CtxEventObserver
 ```
 
-for the GuideBlock you wish to use, then add 
+for the GuideBlock you wish to use, then add following code for kotlin:
 
 ```
         val circleVideoGuideBlocks = "CircleVideo"
@@ -30,12 +30,26 @@ for the GuideBlock you wish to use, then add
             contextualContainer ->
             if(contextualContainer.guidePayload.guide.guideBlock.contentEquals(circleVideoGuideBlocks)){
                 val circleVideoView = CircleVideoGuideBlock(this@MainActivity)
-                val contentUrl:String = contextualContainer.guidePayload.guide.contentText.text ?: ""
-                circleVideoView.show(contentUrl)
+                circleVideoView.show(contentUrl, cornerRadius, diameter) {
+                    val baseView = findViewById<View>(android.R.id.content)
+                    contextualContainer.guidePayload.nextStep.onClick(baseView)
+                }
             }
         }
 ```
+for JetPack compose use following code
+```
+        import com.contextu.al.circlevideo.compose.CircleVideoGuideBlocks
 
+        CircleVideoGuideBlock(
+                        url = contentUrl,
+                        cornerRadius = cornerRadius, widthPercentage = diameter,
+                        onClose = {
+                            val baseView = findViewById<View>(android.R.id.content)
+                            contextualContainer.guidePayload.nextStep.onClick(baseView)
+                        }
+                    ).Content()
+```
 
 4. Build your App and Run it on a phone or
 5. Go to the Dashboard and create a guide:
@@ -44,9 +58,12 @@ for the GuideBlock you wish to use, then add
 * pick one of the “Standard” Contextual Announcement Templates.
 * Preview the Announcement on your Phone - it should look similar to the template
 6. Now go to the Extensibility section in the sidebar and paste in the JSON as follows:
+7. Enter corner radius and diameter in the JSON as percentage values of the screen width eg. enter 50 to set video in 50% of the screen width
    `
    {
-   "guideBlockKey": "CircleVideo"
+       "guideBlockKey": "CircleVideo",
+       "cornerRadius": "50",
+       "diameter": "100" 
    }
    `
 7. If you are still in Preview Mode, then you should see the Announcement will magically change to confetti

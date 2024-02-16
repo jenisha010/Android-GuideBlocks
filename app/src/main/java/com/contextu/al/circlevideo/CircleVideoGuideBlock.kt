@@ -2,13 +2,16 @@ package com.contextu.al.circlevideo
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
+import android.graphics.Outline
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.DisplayMetrics
+import android.view.View
+import android.view.ViewOutlineProvider
 import android.view.Window
-import android.view.WindowManager
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.FrameLayout
 import com.contextu.al.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -20,15 +23,14 @@ class CircleVideoGuideBlock(private val activity: Activity): Dialog(activity) {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
-    fun show(url: String){
+    fun show(url: String, cornerRadius:Int, widthPercentage: Int, onClose: () -> Unit){
         setContentView(R.layout.circle_video)
-        val container:CircularWebViewContainer = findViewById(R.id.container)
-        val webView:CircularWebView = findViewById(R.id.webView)
+        val container: FrameLayout = findViewById(R.id.container)
+        val webView: WebView = findViewById(R.id.webView)
         val btnClose:FloatingActionButton = findViewById(R.id.btnClose)
-        //create code to support video inside web-view
+
         val webSettings = webView.settings
         webSettings.javaScriptEnabled = true
         webSettings.loadWithOverviewMode = true
@@ -37,18 +39,41 @@ class CircleVideoGuideBlock(private val activity: Activity): Dialog(activity) {
         webSettings.setSupportZoom(false)
         webSettings.builtInZoomControls = true
         webSettings.displayZoomControls = false
+        webView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                if (url != null) {
+                    view?.loadUrl(url)
+                }
+                return true
+            }
+        }
 
-        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val width = displayMetrics.widthPixels * 0.90
+        val width = context.resources.displayMetrics.widthPixels
+        val widthPx = ((width * widthPercentage)/100)
+        container.layoutParams.width = widthPx
+        container.layoutParams.height = widthPx
+        val radius = widthPx/2
+        val cornerRadiusPercentage = cornerRadius.toFloat() // eg. 50%
+        val cornerRadiusPx = radius.times(cornerRadiusPercentage / 100)
+        println("cornerRadiusNew: $cornerRadiusPx")
 
-        container.layoutParams.width = width.toInt()
-        container.layoutParams.height = width.toInt()
+        container.outlineProvider = object : ViewOutlineProvider() {
+            override fun getOutline(view: View?, outline: Outline?) {
+                outline?.setRoundRect(
+                    0,
+                    0,
+                    view!!.width,
+                    view.height,
+                    cornerRadiusPx
+                )
+            }
+        }
+        container.clipToOutline = true
 
         webView.loadUrl(url)
         btnClose.setOnClickListener {
             dismiss()
+            onClose()
         }
         show()
     }
